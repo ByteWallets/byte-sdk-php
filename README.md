@@ -1,10 +1,10 @@
-# udun-sdk-php
-udun-sdk-php
+# Bws-sdk-php
+Bws-sdk-php
 
 ## 安装
 ### 方式1：命令安装
 ```php
-	composer require uduncloud/udun-wallet-sdk
+	composer require Bwscloud/Bws-wallet-sdk
 ```
 
 ### 方式2：composer 配置安装
@@ -12,7 +12,7 @@ udun-sdk-php
 ```php
 {
 	"require":{
-		"uduncloud/udun-wallet-sdk": "^1.0"
+		"Bwscloud/Bws-wallet-sdk": "^1.0"
 	}
 }
 ```
@@ -24,38 +24,38 @@ udun-sdk-php
 
 ## 使用
 
-1,新建UdunController.php 
+1,新建BwsController.php 
 ```
-	use udun\Dispatch\UdunDispatch;
+	use Bws\Dispatch\BwsDispatch;
 
-	class UdunController{
-		protected $udunDispatch ;
+	class BwsController{
+		protected $BwsDispatch ;
 		public function __construct()
 	    {
 	       	// 控制器初始化
 	       	$this->initialize();
 	    }
 	    protected function initialize(){
-	    	$this->udunDispatch = new UdunDispatch([
+	    	$this->BwsDispatch = new BwsDispatch([
 	            'merchant_no' => 30000, //商户号
 	            'api_key' => 'c789xxxxxxxxxxxxxxxxx388ecxxx',//apikey
-	            'gateway_address'=>'https://sig11.udun.io', //节点
+	            'gateway_address'=>'https://sig11.Bws.io', //节点
 	            'callUrl'=>'https://localhost/callUrl', //回调地址
 	            'debug' => false  //调试模式
 	        ]);
 	    }
 	}
 ```
-2,在需要使用到接口的类继承 UdunController
+2,在需要使用到接口的类继承 BwsController
 
 ```
 	##使用示例
 	namespace xxxx;
-	class Index extends UdunController{
+	class Index extends BwsController{
 		//查询支持的交易对
 		public function supportCoins()
 	    {
-	    	$result =  $this->udunDispatch->supportCoins(true);
+	    	$result =  $this->BwsDispatch->supportCoins(true);
 	        return json($result);
 	    }
 
@@ -63,35 +63,35 @@ udun-sdk-php
 	    //创建地址
 		public function createAddress()
 	    {
-	    	$result =  $this->udunDispatch->createAddress('195');
+	    	$result =  $this->BwsDispatch->createAddress('195');
 	        return json($result);
 	    }
 
 	    //验证地址合法性
 		public function checkAddress()
 	    {
-	    	$result =  $this->udunDispatch->checkAddress('195','TEpK1aWkjDue6j8reeeMqG7hdJ5tRytyAF');
+	    	$result =  $this->BwsDispatch->checkAddress('195','TEpK1aWkjDue6j8reeeMqG7hdJ5tRytyAF');
 	        return json($result);
 	    }
 
 	    //查询地址是否存在
 		public function existAddress()
 	    {
-	    	$result =  $this->udunDispatch->existAddress('195','TEpK1aWkjDue6j8reeeMqG7hdJ5tRytyAF');
+	    	$result =  $this->BwsDispatch->existAddress('195','TEpK1aWkjDue6j8reeeMqG7hdJ5tRytyAF');
 	        return json($result);
 	    }
 
 	    //申请提币
 		public function withdraw()
 	    {
-	    	$result =  $this->udunDispatch->withdraw('sn00001','195','195','TEpK1aWkjDue6j8reeeMqG7hdJ5tRytyAF',10);
+	    	$result =  $this->BwsDispatch->withdraw('sn00001','195','195','TEpK1aWkjDue6j8reeeMqG7hdJ5tRytyAF',10);
 	        return json($result);
 	    }
 
 	    //交易回调
 		public function callback()
 	    {
-	    	$result =  $this->udunDispatch->callback();
+	    	$result =  $this->BwsDispatch->callback();
 	        return json($result);
 	    } 
 
