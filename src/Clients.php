@@ -1,5 +1,5 @@
 <?php
-namespace Byte\Dispatch;
+namespace Bws\Dispatch;
 class Clients extends Api
 {
 	// 获取商户支持的币种信息
@@ -109,7 +109,8 @@ class Clients extends Api
         file_put_contents($path, "【" . date('Y-m-d H:i:s') . "】" . $msg . "\r\n\r\n", FILE_APPEND);
     }
     //回调函数
-    public function callback(){
+    public function callback()
+    {
         $body =  $_POST['body'];
         $nonce = $_POST['nonce'];
         $timestamp = $_POST['timestamp'];
@@ -120,7 +121,7 @@ class Clients extends Api
         //验证签名
         $signCheck = $this->signature($body,$timestamp,$nonce);
         if ($sign != $signCheck) {
-            throw new ByteDispatchException(-1, '签名错误');
+            throw new BwsDispatch(-1, '签名错误');
             return ;
         }
         $body = json_decode($body);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Byte\Dispatch;
+namespace Bws\Dispatch;
 
 
 use Pimple\Container;

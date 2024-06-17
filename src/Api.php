@@ -1,17 +1,21 @@
 <?php
-namespace Byte\Dispatch;
+namespace Bws\Dispatch;
 use Hanson\Foundation\AbstractAPI;
 class Api extends AbstractAPI
 {
     //商户号
-    protected $merchant_no;   
-    //apikey      
-    protected $api_key;  
-    //节点地址           
+    protected $merchant_no;
+
+    //apikey
+    protected $api_key;
+
+    //节点地址
     protected $gateway_address;
-    //回调地址     
-    protected $callUrl;             
-    public function __construct( $merchant_no, string $api_key,string $gateway_address, string $callUrl)
+
+    //回调地址
+    protected $callUrl;
+
+    public function __construct(string $merchant_no, string $api_key, string $gateway_address, string $callUrl)
     {
         $this->merchant_no = $merchant_no;
         $this->api_key = $api_key;
@@ -21,7 +25,7 @@ class Api extends AbstractAPI
 
  
     /**
-     * @param string $method  
+     * @param string $method
      * @param array $params
      * @return result
      * @throws ByteDispatchException
@@ -36,7 +40,7 @@ class Api extends AbstractAPI
             $body = '['.json_encode($body).']';
         }
         
-        $sign = $this->signature($body,$time,$nonce);
+        $sign = $this->signature($body, $time, $nonce);
         $params = array(
         	'timestamp' => $time,
             'nonce' => $nonce,
@@ -50,7 +54,7 @@ class Api extends AbstractAPI
         return $result;
     }
 
-    public function signature($body,$time,$nonce)
+    public function signature(string $body, int $time, string $nonce)
     {
         return md5($body.$this->api_key.$nonce.$time);
     }
@@ -59,10 +63,10 @@ class Api extends AbstractAPI
      * @param $result
      * @throws ByteDispatchException
      */
-    private function checkErrorAndThrow($result)
+    private function checkErrorAndThrow(array $result)
     {
         if (!$result || $result['code'] != 200) {
-            throw new ByteDispatchException($result['code'], $result['message']);
+            throw new BwsDispatchException($result['code'], $result['message']);
         }
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Byte\Dispatch;
+namespace Bws\Dispatch;
 
 use Hanson\Foundation\Foundation;
 
  
-class ByteDispatch extends Foundation
+class BwsDispatch extends Foundation
 {
 
     private $clients;
